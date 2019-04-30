@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pi-rauders' Map</title>
+  </head>
+  <body>
+      <h1>Where is everyone?</h1>
+      <ul>
+        {%for name, info in users.items()%}
+            <li>{{name}}: {{info.room}} at  {{info.dt}}</li>
+        {%endfor%}
+      </ul>
+  </body>
+</html>

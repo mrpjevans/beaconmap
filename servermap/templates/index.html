@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pi-rauders' Map</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .avatar  {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            z-index: 10;
+        }
+        .rooms {
+            position: relative;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        .rooms-Workshop {
+            left: 660px;
+            top: 540px
+        }
+        .rooms-Study {
+            left: 1050px;
+            top: 750px
+        }
+    </style>
+  </head>
+  <body>
+      
+        <div class="mx-auto p-3" style="width:454px">
+            <img src="/static/title.png" />
+        </div>
+
+        {%for name, info in users.items()%}
+            <img src="/static/{{name}}.jpg" class="avatar rounded-pill rooms-{{info.room}}" />
+        {%endfor%}
+
+        <div class="mx-auto" style="width:832px">
+            <img src="/static/rooms.png" class="rooms" />
+        </div>
+        
+      <ul>
+        {%for name, info in users.items()%}
+            <li>{{name}}: {{info.room}} at  {{info.dt}}</li>
+        {%endfor%}
+      </ul>
+
+  </body>
+</html>
