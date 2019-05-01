@@ -33,9 +33,9 @@ def readings():
     dtString = currentDT.strftime("%H:%M:%S %d/%m/%y")
 
     print(payload)
-    tracker[payload['room']] = {'beacons': payload['beacons'], 'dt': dtString}
+    # tracker[payload['room']] = {'beacons': payload['beacons'], 'dt': dtString}
 
     return jsonify(True)
 
 # Make sure the app can be seen by the scanners
-app.run(host="0.0.0.0", debug=True)
+app.run(host="0.0.0.0")
