@@ -2,7 +2,11 @@ from flask import Flask, request, jsonify, render_template
 import datetime
 
 app = Flask(__name__)
-
+beacons = {
+    'abcd': {
+        'name': 'PJ'
+    }
+}
 tracker = {}
 
 
@@ -30,7 +34,7 @@ def readings():
 
     # We add a timestamp
     currentDT = datetime.datetime.now()
-    dtString = currentDT.strftime("%H:%M:%S %d/%m/%y")
+    dtString = currentDT.strftime('%H:%M:%S %d/%m/%y')
 
     print(payload)
     # tracker[payload['room']] = {'beacons': payload['beacons'], 'dt': dtString}
