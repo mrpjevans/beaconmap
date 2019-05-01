@@ -5,7 +5,7 @@ from beacontools import BeaconScanner
 def callback(bt_addr, rssi, packet, additional_info):
     print("<%s, %d> %s %s" % (bt_addr, rssi, packet, additional_info))
 
-# scan for all advertisements from beacons
+# Scan for 5 seconds
 scanner = BeaconScanner(callback)
 scanner.start()
 time.sleep(5)
