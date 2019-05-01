@@ -5,18 +5,7 @@ from beacontools import BeaconScanner
 serverUrl = "http://192.168.0.2:5000/readings"
 
 room = "Kitchen"
-beacons = [
-  {
-    "id": "http://example.org/pj",
-    "name": "PJ",
-    "score": 0
-  },
-  {
-    "id": "5e7c4ded-061a-5f1d-ec22-6ca1d97fdade",
-    "name": "Trish",
-    "score": 0
-  }
-]
+beacons = {}
 
 
 # This function is called whenever a packet is detected
@@ -31,10 +20,11 @@ def callback(bt_addr, rssi, packet, additional_info):
     elif typeOfBeacon == "IBeaconAdvertisement":
         beaconId = packet.uuid
 
-    # Is it one of ours?
-    for index, beacon in enumerate(beacons):
-        if beacon['id'] == beaconId:
-            beacons[index]['score'] += 1
+    # Track how many times we've seen this beacon
+    if beaconId not in beacons:
+        beacons[beaconId] = 1
+    else:
+        beacons[beaconId] += 1
 
 # Scan for all advertisements from beacons
 print('Starting beacon scanner')
@@ -47,7 +37,7 @@ while True:
     print('Waiting 10 seconds')
     time.sleep(10)
 
-    # Now send the current rates to the server
+    # Now send the current scores to the server
     print('Sending to server')
     try:
         response = requests.put(serverUrl, json={"room": room,
@@ -60,5 +50,4 @@ while True:
         print("Communication error")
 
     # Clean the scores
-    for index, beacon in enumerate(beacons):
-        beacons[index]['score'] = 0
+    beacons = {}
