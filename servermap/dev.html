@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="5" />
+    <title>Pi-rauders' Map</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .avatar {
+          position: relative;
+          margin-bottom: -30px;
+        }
+        .rooms  {
+            position: relative;
+        }
+        /*
+            Change these values to place your avatar
+            at the correct place on your map
+            Make sure the names match the names given
+            to each beacon detector exactly. e.g.
+            'Kitchen' becaomes 'room-Kitchen'
+        */
+        .room {
+          position: absolute;
+        }
+        .room-Games {
+          margin-left: 500px;
+          margin-top: 540px;
+        }
+        .room-Study {
+          margin-left: 170px;
+          margin-top: 520px;
+        }
+        .room-Music {
+          margin-left: 110px;
+          margin-top: 330px;
+        }
+        .room-Guestroom {
+          margin-left: 350px;
+          margin-top: 130px;
+        }
+        .room-Bedroom {
+          margin-left: 650px;
+          margin-top: 350px;
+        }
+        .errContainer {
+          position: absolute;
+          z-index: 20;
+        }
+    </style>
+  </head>
+  <body>
+      
+        <div class="mx-auto p-3" style="width:454px">
+            <img src="static/title.png" />
+        </div>
+
+        <div class="mx-auto" style="width:832px">
+            
+          <div class="errContainer">  
+              <div class="room room-Bedroom">
+                <img src="static/PJ.jpg" class="avatar rounded-pill" />
+                <img src="static/Trish.jpg" class="avatar rounded-pill" />
+              </div>
+              <div class="room room-Study">
+                  <img src="static/Trish.jpg" class="avatar rounded-pill" />
+                </div>
+            </div>
+            <img src="static/rooms.png" class="rooms" />  
+        </div>
+        
+      <ul>
+        {%for name, info in users.items()%}
+            <li>{{name}}: {{info.room}} at  {{info.dt}}</li>
+        {%endfor%}
+      </ul>
+
+  </body>
+</html>

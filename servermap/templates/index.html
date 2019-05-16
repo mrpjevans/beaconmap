@@ -1,50 +1,92 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Pi-rauders' Map</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-        .avatar  {
-            position: absolute;
-            top: 100px;
-            left: 0;
-            z-index: 10;
-        }
-        .rooms {
-            position: relative;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-        .rooms-Workshop {
-            left: 660px;
-            top: 540px
-        }
-        .rooms-Study {
-            left: 1050px;
-            top: 750px
-        }
-    </style>
-  </head>
-  <body>
-      
-        <div class="mx-auto p-3" style="width:454px">
-            <img src="/static/title.png" />
+
+<head>
+  <meta http-equiv="refresh" content="20" />
+  <title>Pi-rauders' Map</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    .avatar {
+      position: relative;
+      margin-bottom: -30px;
+    }
+
+    .rooms {
+      position: relative;
+    }
+
+    /*
+            Change these values to place your avatar
+            at the correct place on your map
+            Make sure the names match the names given
+            to each beacon detector exactly. e.g.
+            'Kitchen' becaomes 'room-Kitchen'
+        */
+    .room {
+      position: absolute;
+    }
+
+    .room-Games {
+      margin-left: 500px;
+      margin-top: 540px;
+    }
+
+    .room-Study {
+      margin-left: 170px;
+      margin-top: 520px;
+    }
+
+    .room-Music {
+      margin-left: 110px;
+      margin-top: 330px;
+    }
+
+    .room-Guestroom {
+      margin-left: 350px;
+      margin-top: 130px;
+    }
+
+    .room-Bedroom {
+      margin-left: 650px;
+      margin-top: 350px;
+    }
+
+    .avatarContainer {
+      position: absolute;
+      z-index: 20;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="mx-auto p-3" style="width:454px">
+    <img src="static/title.png" />
+  </div>
+
+  <div class="mx-auto" style="width:832px">
+
+    <div class="avatarContainer">
+      {%for room in ['Games', 'Study', 'Music', 'Guestroom', 'Bedroom'] %}
+        <div class="room room-{{room}}">
+          {%for name, info in users.items()%}
+            {%if info.room == room%}
+              <img src="static/{{name}}.jpg" class="avatar rounded-pill" />
+            {%endif%}
+          {%endfor%}
         </div>
+      {%endfor%}
+    </div>
+    <img src="static/rooms.png" class="rooms" />
+  </div>
 
-        {%for name, info in users.items()%}
-            <img src="/static/{{name}}.jpg" class="avatar rounded-pill rooms-{{info.room}}" />
-        {%endfor%}
+  <ul>
+    {%for name, info in users.items()%}
+    <li>{{name}}: {{info.room}} at {{info.dt}}</li>
+    {%endfor%}
+  </ul>
 
-        <div class="mx-auto" style="width:832px">
-            <img src="/static/rooms.png" class="rooms" />
-        </div>
-        
-      <ul>
-        {%for name, info in users.items()%}
-            <li>{{name}}: {{info.room}} at  {{info.dt}}</li>
-        {%endfor%}
-      </ul>
+</body>
 
-  </body>
 </html>
